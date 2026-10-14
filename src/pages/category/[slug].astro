@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("articles");
+  const slugSet = new Set<string>();
+  for (const a of articles) {
+    for (const cs of a.data.categorySlugs) {
+      slugSet.add(cs);
+    }
+  }
+  return Array.from(slugSet).map(slug => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const articles = await getCollection("articles");
+const filtered = articles
+  .filter(a => a.data.categorySlugs.includes(slug!))
+  .sort((a, b) => {
+    const ap = a.data.pinned ? 1 : 0;
+    const bp = b.data.pinned ? 1 : 0;
+    if (ap !== bp) return bp - ap;
+    return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+  });
+
+const catNames: Record<string, string> = {
+  "home-design": "Home Design",
+  "fashion": "Fashion",
+  "beauty": "Beauty",
+  "technology": "Technology",
+  "outdoor": "Outdoor",
+};
+const catName = catNames[slug!] || slug!;
+const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+---
+
+<Layout title={`${catName} Articles`} description={`Latest ${catName.toLowerCase()} guides on Orlisia.`}>
+  <div class="category-header">
+    <div class="breadcrumb">
+      <a href="/">Home</a> &raquo; <span>{catName}</span>
+    </div>
+    <h1>{catName}</h1>
+    <p>{filtered.length} articles</p>
+  </div>
+
+  <div class="ln-grid">
+    {filtered.map(article => (
+      <article class="ln-card">
+        {article.data.image && <img src={article.data.image} alt={article.data.title} loading="lazy" />}
+        <div class="ln-card-body">
+          <h4><a href={`/${article.data.slug}/`}>{article.data.title}</a></h4>
+          {article.data.excerpt && <p>{article.data.excerpt}</p>}
+          <span>{fmt(article.data.date)}</span>
+        </div>
+      </article>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .ln-grid { padding-bottom: 2rem; }
+</style>

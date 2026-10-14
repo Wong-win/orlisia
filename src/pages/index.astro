@@ -1,0 +1,213 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+// Pinned articles sort first, then date desc
+const all = (await getCollection("articles")).sort((a, b) => {
+  const ap = a.data.pinned ? 1 : 0;
+  const bp = b.data.pinned ? 1 : 0;
+  if (ap !== bp) return bp - ap;
+  return +new Date(b.data.date) - +new Date(a.data.date);
+});
+
+// Hero: first 10 articles (2 slides × 5 cards)
+const hero = all.slice(0, 10);
+const used = new Set<string>();
+hero.forEach(a => used.add(a.data.slug));
+
+// Category sections filter out hero articles
+const homeDesignAll = all.filter(a => a.data.categorySlugs.includes("home-design") && !used.has(a.data.slug));
+const fashionAll = all.filter(a => a.data.categorySlugs.includes("fashion") && !used.has(a.data.slug));
+const beautyAll = all.filter(a => a.data.categorySlugs.includes("beauty") && !used.has(a.data.slug));
+const techAll = all.filter(a => a.data.categorySlugs.includes("technology") && !used.has(a.data.slug));
+const outdoorAll = all.filter(a => a.data.categorySlugs.includes("outdoor") && !used.has(a.data.slug));
+
+// Recent: next 10 after hero (mixed categories)
+const recent = all.slice(10, 20);
+
+// Latest News: 6 with excerpts (different from hero, fashion, beauty, tech)
+const latest = all.filter(a => !used.has(a.data.slug) && a.data.excerpt).slice(0, 6);
+
+const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+---
+
+<Layout>
+  <!-- 1. Hero: 10 articles, 2 slides × 5 (top 2 big, bottom 3) -->
+  <section class="hero-section">
+    <div class="section-header">
+      <h2>Featured</h2>
+      <a href="/category/home-design/" class="view-all">EXPLORE CATEGORIES →</a>
+    </div>
+    <div class="hero-carousel" id="heroCarousel">
+      {[0, 1].map(si => (
+        <div class={`hero-slide ${si === 0 ? 'active' : ''}`}>
+          <div class="hero-row-top">
+            {hero.slice(si * 5, si * 5 + 2).map(a => (
+              <a href={`/${a.data.slug}/`} class="hero-card">
+                {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
+                <div class="hero-card-overlay">
+                  <h3>{a.data.title}</h3>
+                  <span>{fmt(a.data.date)}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <div class="hero-row-bottom">
+            {hero.slice(si * 5 + 2, si * 5 + 5).map(a => (
+              <a href={`/${a.data.slug}/`} class="hero-card">
+                {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
+                <div class="hero-card-overlay">
+                  <h3>{a.data.title}</h3>
+                  <span>{fmt(a.data.date)}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+    <button class="carousel-btn carousel-prev" id="carPrev" aria-label="Previous">‹</button>
+    <button class="carousel-btn carousel-next" id="carNext" aria-label="Next">›</button>
+  </section>
+
+  <!-- 2. Three columns: Home Design | Fashion + Beauty | Recent Posts -->
+  <section class="three-col">
+    <div>
+      <div class="section-header">
+        <h2><a href="/category/home-design/">Home Design</a></h2>
+      </div>
+      <div class="vlist">
+        {homeDesignAll.slice(0, 10).map(a => (
+          <div class="vlist-item">
+            {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
+            <div class="vlist-item-info">
+              <h4><a href={`/${a.data.slug}/`}>{a.data.title}</a></h4>
+              <span>{fmt(a.data.date)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="center-col">
+      <div>
+        <div class="section-header">
+          <h2><a href="/category/fashion/">Fashion</a></h2>
+        </div>
+        <div class="csec-grid">
+          {fashionAll.slice(0, 4).map(a => (
+            <a href={`/${a.data.slug}/`} class="csec-card">
+              {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
+              <div class="csec-card-overlay">
+                <h3>{a.data.title}</h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div>
+        <div class="section-header">
+          <h2><a href="/category/beauty/">Beauty</a></h2>
+        </div>
+        <div class="csec-grid">
+          {beautyAll.slice(0, 4).map(a => (
+            <a href={`/${a.data.slug}/`} class="csec-card">
+              {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
+              <div class="csec-card-overlay">
+                <h3>{a.data.title}</h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-header">
+        <h2>Recent Posts</h2>
+      </div>
+      <div class="vlist">
+        {recent.map(a => (
+          <div class="vlist-item">
+            {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
+            <div class="vlist-item-info">
+              <h4><a href={`/${a.data.slug}/`}>{a.data.title}</a></h4>
+              <span>{fmt(a.data.date)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Technology full-width 2x2 grid -->
+  <section class="fw-section">
+    <div class="section-header">
+      <h2><a href="/category/technology/">Technology</a></h2>
+      <a href="/category/technology/" class="view-all">VIEW ALL →</a>
+    </div>
+    <div class="fw-grid">
+      {techAll.slice(0, 4).map(a => (
+        <a href={`/${a.data.slug}/`} class="fw-card">
+          {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
+          <div class="fw-card-overlay">
+            <h3>{a.data.title}</h3>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- 4. Bottom: Outdoor (narrow) + Latest News (3×2 grid with excerpts) -->
+  <section class="bottom-cols">
+    <div>
+      <div class="section-header">
+        <h2><a href="/category/outdoor/">Outdoor</a></h2>
+      </div>
+      <div class="vlist">
+        {outdoorAll.slice(0, 10).map(a => (
+          <div class="vlist-item">
+            {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
+            <div class="vlist-item-info">
+              <h4><a href={`/${a.data.slug}/`}>{a.data.title}</a></h4>
+              <span>{fmt(a.data.date)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <div class="section-header">
+        <h2>Latest Articles</h2>
+      </div>
+      <div class="ln-grid">
+        {latest.map(a => (
+          <article class="ln-card">
+            {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
+            <div class="ln-card-body">
+              <h4><a href={`/${a.data.slug}/`}>{a.data.title}</a></h4>
+              <p>{a.data.excerpt || ""}</p>
+              <span>{fmt(a.data.date)}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const slides = document.querySelectorAll('.hero-slide');
+  let si = 0;
+  document.getElementById('carNext')?.addEventListener('click', () => {
+    slides[si].classList.remove('active');
+    si = (si + 1) % slides.length;
+    slides[si].classList.add('active');
+  });
+  document.getElementById('carPrev')?.addEventListener('click', () => {
+    slides[si].classList.remove('active');
+    si = (si - 1 + slides.length) % slides.length;
+    slides[si].classList.add('active');
+  });
+</script>

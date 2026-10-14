@@ -1,0 +1,24 @@
+# build artifacts
+node_modules/
+dist/
+.astro/
+.wrangler/
+wrangler.jsonc
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# env
+.env
+.env.production
+.env.local
+
+# python scratch
+*.py
+
+# backups (excluded from repo)
+.backup-*
+.backup-images-*

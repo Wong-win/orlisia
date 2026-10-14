@@ -1,0 +1,54 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+const siteTitle = title ? `${title} - Orlisia` : "Orlisia — Editorial guides for home, fashion, beauty, technology, and outdoor";
+const siteDesc = description || "Practical guides across home, fashion, beauty, technology, and outdoor living — without the fluff.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, `https://www.orlisia.com`)} />
+    <title>{siteTitle}</title>
+    <meta name="description" content={siteDesc} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    {image && <meta property="og:image" content={image} />}
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={siteDesc} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google tag (gtag.js) — Orlisia GA4 -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-H0EJFWRMJY"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-H0EJFWRMJY');
+    </script>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <Header />
+      <main class="container">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

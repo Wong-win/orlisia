@@ -1,0 +1,39 @@
+---
+const currentPath = Astro.url.pathname;
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "Home Design", href: "/category/home-design/" },
+  { label: "Fashion", href: "/category/fashion/" },
+  { label: "Beauty", href: "/category/beauty/" },
+  { label: "Technology", href: "/category/technology/" },
+  { label: "Outdoor", href: "/category/outdoor/" },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-logo">Orlisia<span>.</span></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
+        <path d="M1 1h20M1 9h20M1 17h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <nav class="site-nav" id="siteNav">
+      {navItems.map(item => (
+        <a href={item.href} class={currentPath === item.href ? "active" : ""}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("menuToggle");
+  const nav = document.getElementById("siteNav");
+  toggle?.addEventListener("click", () => {
+    nav?.classList.toggle("open");
+  });
+</script>
