@@ -27,8 +27,6 @@ const recent = all.slice(10, 20);
 
 // Latest News: 6 with excerpts (different from hero, fashion, beauty, tech)
 const latest = all.filter(a => !used.has(a.data.slug) && a.data.excerpt).slice(0, 6);
-
-const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 ---
 
 <Layout>
@@ -47,7 +45,6 @@ const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "nume
                 {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
                 <div class="hero-card-overlay">
                   <h3>{a.data.title}</h3>
-                  <span>{fmt(a.data.date)}</span>
                 </div>
               </a>
             ))}
@@ -58,7 +55,6 @@ const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "nume
                 {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
                 <div class="hero-card-overlay">
                   <h3>{a.data.title}</h3>
-                  <span>{fmt(a.data.date)}</span>
                 </div>
               </a>
             ))}
@@ -82,7 +78,6 @@ const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "nume
             {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
             <div class="vlist-item-info">
               <h4><a href={`/${a.data.slug}/`}>{a.data.title}</a></h4>
-              <span>{fmt(a.data.date)}</span>
             </div>
           </div>
         ))}
@@ -132,7 +127,6 @@ const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "nume
             {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
             <div class="vlist-item-info">
               <h4><a href={`/${a.data.slug}/`}>{a.data.title}</a></h4>
-              <span>{fmt(a.data.date)}</span>
             </div>
           </div>
         ))}
@@ -170,7 +164,6 @@ const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "nume
             {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
             <div class="vlist-item-info">
               <h4><a href={`/${a.data.slug}/`}>{a.data.title}</a></h4>
-              <span>{fmt(a.data.date)}</span>
             </div>
           </div>
         ))}
@@ -188,7 +181,6 @@ const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "nume
             <div class="ln-card-body">
               <h4><a href={`/${a.data.slug}/`}>{a.data.title}</a></h4>
               <p>{a.data.excerpt || ""}</p>
-              <span>{fmt(a.data.date)}</span>
             </div>
           </article>
         ))}

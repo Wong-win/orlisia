@@ -32,7 +32,6 @@ const catNames: Record<string, string> = {
   "outdoor": "Outdoor",
 };
 const catName = catNames[slug!] || slug!;
-const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 ---
 
 <Layout title={`${catName} Articles`} description={`Latest ${catName.toLowerCase()} guides on Orlisia.`}>
@@ -51,7 +50,6 @@ const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { year: "nume
         <div class="ln-card-body">
           <h4><a href={`/${article.data.slug}/`}>{article.data.title}</a></h4>
           {article.data.excerpt && <p>{article.data.excerpt}</p>}
-          <span>{fmt(article.data.date)}</span>
         </div>
       </article>
     ))}

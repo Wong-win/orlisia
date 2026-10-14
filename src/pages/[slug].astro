@@ -12,11 +12,10 @@ export async function getStaticPaths() {
 }
 
 const { article } = Astro.props;
-const { title, date, categories, categorySlugs, image, excerpt } = article.data;
+const { title, categories, categorySlugs, image, excerpt } = article.data;
 
 // Render markdown body via marked
 const htmlContent = marked.parse(article.body || "");
-const formattedDate = new Date(date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 ---
 
 <Layout title={title} description={excerpt} image={image}>
@@ -24,7 +23,6 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", { year: "numeri
     {image && <img src={image} alt={title} class="article-featured-image" />}
     <h1>{title}</h1>
     <div class="article-meta">
-      <time datetime={date}>{formattedDate}</time>
       {categories.map((cat: string, i: number) => (
         <a href={`/category/${categorySlugs[i]}/`} class={`article-cat-chip cat-${categorySlugs[i]}`}>
           {cat}
