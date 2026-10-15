@@ -2,7 +2,7 @@
 title: "The Makeup Brushes Guide: What to Buy, What to Skip, and How to Actually Use Them"
 date: "2026-10-14"
 slug: "makeup-brushes-guide"
-image: "https://images.pexels.com/photos/6148/pexels-photo-6148.jpeg?auto=compress&cs=tinysrgb&w=1800"
+image: "https://images.pexels.com/photos/205923/pexels-photo-205923.jpeg?auto=compress&cs=tinysrgb&w=1800"
 categories: ["Beauty"]
 categorySlugs: ["beauty"]
 excerpt: "A practical breakdown of makeup brushes — natural versus synthetic fibers, the shapes that actually matter, brand tiers at every budget, and a cleaning routine that keeps them sanitary."

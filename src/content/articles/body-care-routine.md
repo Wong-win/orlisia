@@ -2,7 +2,7 @@
 title: "Body Care, Done Right: The Routine That Replaces Eleven Half-Used Bottets"
 date: "2026-10-15"
 slug: "body-care-routine"
-image: "https://images.pexels.com/photos/31110093/pexels-photo-31110093.jpeg?auto=compress&cs=tinysrgb&w=1800"
+image: "https://images.pexels.com/photos/8015698/pexels-photo-8015698.jpeg?auto=compress&cs=tinysrgb&w=1800"
 categories: ["Beauty"]
 categorySlugs: ["beauty"]
 excerpt: "A complete body care routine — cleanse, exfoliate, hydrate — built around real ingredients, with $20 drugstore picks and $80 luxury alternatives that both work."
