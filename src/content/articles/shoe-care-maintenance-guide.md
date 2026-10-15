@@ -2,7 +2,7 @@
 title: "The Honest Shoe Care Guide: Leather, Suede, Sneakers, and Boots — Cleaning, Conditioning, Storage, and Resoling"
 date: "2026-10-14"
 slug: "shoe-care-maintenance-guide"
-image: "https://images.pexels.com/photos/33039735/Pexels-photo-33039735.jpeg?auto=compress&cs=tinysrgb&w=1800"
+image: "https://images.pexels.com/photos/33039735/pexels-photo-33039735.jpeg?auto=compress&cs=tinysrgb&w=1800"
 categories: ["Fashion"]
 categorySlugs: ["fashion"]
 excerpt: "How to clean, condition, store, and resole leather, suede, sneakers, and boots — so they last five years instead of one."
@@ -47,7 +47,7 @@ Smooth leather is the easiest material to maintain. The enemies are water (witho
 
 A pair of $400 Allen Edmonds or Thursday Captains, cared for this way, lasts 8–12 years. The same shoes neglected last 2–3.
 
-![A shoe being polished by hand — the kind of small ritual that adds a decade to good leather.](https://images.pexels.com/photos/37358113/Pexels-photo-37358113.jpeg?auto=compress&cs=tinysrgb&w=1600)
+![A shoe being polished by hand — the kind of small ritual that adds a decade to good leather.](https://images.pexels.com/photos/37358113/pexels-photo-37358113.jpeg?auto=compress&cs=tinysrgb&w=1600)
 
 ## Suede and nubuck
 
