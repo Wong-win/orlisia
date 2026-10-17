@@ -364,14 +364,13 @@ blockquote {
 }
 
 .csec-card {
-  display: block;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   border-radius: var(--radius-sm);
   background: var(--surface);
   border: 1px solid var(--border-light);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  aspect-ratio: 4/3;
+  overflow: hidden;
 }
 
 .csec-card:hover {
@@ -381,26 +380,23 @@ blockquote {
 
 .csec-card img {
   width: 100%;
-  height: 100%;
+  height: 180px;
   object-fit: cover;
+  display: block;
 }
 
 .csec-card-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  padding: 0.85rem 1rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
-  color: #fff;
+  padding: 0.85rem 1rem 1rem;
+  background: #fff;
+  color: #1c1c1c;
 }
 
 .csec-card-overlay h3 {
-  font-size: 0.98rem;
-  font-weight: 700;
-  line-height: 1.3;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
   margin: 0;
-  color: #fff;
+  color: #1c1c1c;
 }
 
 /* === Full-Width Section (Technology) === */
