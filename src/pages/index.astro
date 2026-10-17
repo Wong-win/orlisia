@@ -90,22 +90,7 @@ const latest = all.filter(a => !used.has(a.data.slug) && a.data.excerpt).slice(0
           <h2><a href="/category/fashion/">Fashion</a></h2>
         </div>
         <div class="csec-grid">
-          {fashionAll.slice(0, 4).map(a => (
-            <a href={`/${a.data.slug}/`} class="csec-card">
-              {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
-              <div class="csec-card-overlay">
-                <h3>{a.data.title}</h3>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-      <div>
-        <div class="section-header">
-          <h2><a href="/category/beauty/">Beauty</a></h2>
-        </div>
-        <div class="csec-grid">
-          {beautyAll.slice(0, 6).map(a => (
+          {fashionAll.slice(0, 6).map(a => (
             <a href={`/${a.data.slug}/`} class="csec-card">
               {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
               <div class="csec-card-overlay">
@@ -159,7 +144,7 @@ const latest = all.filter(a => !used.has(a.data.slug) && a.data.excerpt).slice(0
         <h2><a href="/category/outdoor/">Outdoor</a></h2>
       </div>
       <div class="vlist">
-        {outdoorAll.slice(0, 10).map(a => (
+        {outdoorAll.slice(0, 8).map(a => (
           <div class="vlist-item">
             {a.data.image && <img src={a.data.image} alt={a.data.title} loading="lazy" />}
             <div class="vlist-item-info">
